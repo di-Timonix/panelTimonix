@@ -1,0 +1,34 @@
+/*
+	
+	Timonix Arads
+	system zarządzania serwisami timonix.pl
+	di_Timonix
+	
+	styl css arads
+
+*/
+
+	.arads-lyout {
+		flex-grow: 0;
+		flex-basis: calc(33% - 10px);
+	}
+	
+	.arads-lyout-img {
+		max-height: calc(200px + 15px); width: 100%; object-fit: fill;
+	}
+	
+	@media (max-width: 992px) {
+		.arads-lyout {
+			flex-basis: calc(50% - 10px);
+		}			
+	}
+
+	@media (max-width: 768px) {
+					
+	}
+
+	@media (max-width: 576px) {
+		.arads-lyout {
+			flex-basis: calc(100% - 10px);
+		}					
+	} 	

@@ -1,0 +1,1703 @@
+/*
+//
+//				Timonix Script Rezult - reguły javascript\jquery
+//									V.1.0
+//					Wszelkie Prawa Zaszczeżone by Timonix
+//
+*/
+
+	// informacja o starcie tsr
+	console.info("iniciowanie: tsr");
+	console.info("ładowanie: tsr");
+	console.info("startowanie: tsr");
+	
+	
+	
+	
+	/* pobieranie szerokośći i wysokośći okna (window.document) */
+	/*var screanX = $(window.document).on("mousemove", function(e){
+		console.log(e.clientX);
+		return (e.clientX);
+	});*/
+		//console.log(this);
+		//console.log(this.innerWidth);
+		//console.log(this.innerHeight);
+		// rzeczywista rozdzielczość ekrana
+		var orginal_screenX = window.screen.width;
+		var orginal_screenY = window.screen.height;
+		var orginal_screenWidth = window.screen.width;
+		var orginal_screenHeight = window.screen.height;
+		var orginal_Width = window.screen.width;
+		var orginal_Height = window.screen.height;
+		// skalowana rozdzielczość ekrana
+		var screenX = this.innerWidth;
+		var screenY = this.innerHeight;
+		var screenWidth = this.innerWidth;
+		var screenHeight = this.innerHeight;
+		var Width = this.innerWidth;
+		var Height = this.innerHeight;
+		
+		console.log(orginal_screenX);
+		console.log(orginal_screenY);
+		console.log(orginal_screenWidth);
+		console.log(orginal_screenHeight);
+		console.log(orginal_Width);
+		console.log(orginal_Height);
+		console.log(screenX);
+		console.log(screenY);
+		console.log(screenWidth);
+		console.log(screenHeight);
+		console.log(Width);
+		console.log(Height);
+
+	// nasłuchiwanie window ze zminą rozdzielczośći ekranu + aktulizowanie elementów DOM po zmianie rozdzielczość
+	//var tsr_rezise2 = window.addEventListener("resize", tsr_controler_rezise);
+	
+	window.addEventListener("resize", function() {
+		console.log(this);
+		console.log(this.innerWidth);
+		console.log(this.innerHeight);
+		// skalowana rozdzielczość ekrana
+		screenX = window.screen.innerWidth;
+		screenY = window.screen.innerWidth;
+		screenWidth = window.screen.innerWidth;
+		screenHeight = window.screen.innerWidth;
+		Width = window.screen.innerWidth;
+		Height = window.screen.innerWidth;
+		
+		
+		console.log(screenWidth);
+		console.log(screenHeight);
+		console.log(window.screen.width);
+		console.log(window.screen.height);
+		
+	});
+	
+	// wykonywanie kontrolera rezise {}
+	function tsr_controler_rezise(fun) {
+			//fun();
+			window.addEventListener("resize", fun);
+			//tsr_rezise2.addEventListener(fun);
+			console.log("a");
+	};
+	// wykonywanie kontrolera click {}
+	function tsr_controler_click(fun) {
+			//fun();
+			window.addEventListener("click", fun);
+			$(document).on("click", fun);
+			//tsr_rezise2.addEventListener(fun);
+			console.log("b");
+	};
+
+	// funkcja dodająca funkcjie do kontrolerów (rezise, pozytion, url_state itp)
+	function tsr_controler(arg, fun) {
+		// sprawdzanie czy użytkownik podał właśćiwy dostępny kontroler tsr
+		if(arg == "rezise"){
+			tsr_controler_rezise(fun);
+			//this.call.tsr_controler_rezise("");
+			//xa.call(fun);
+			//tsr_rezise.addEventListener('command', fun, true);
+		}else if(arg == "click"){
+			tsr_controler_click(fun);
+			//this.call.tsr_controler_rezise("");
+			//xa.call(fun);
+			//tsr_rezise.addEventListener('command', fun, true);
+		}else if(arg.indexOf == " "){
+			console.error("Błędny kontroler tsr: " + arg);
+			console.trace(arg, fun)
+			return "wrong_tsr_controller";			
+		}else if(arg.indexOf == ""){
+			console.error("Błędny kontroler tsr: " + arg);
+			console.trace(arg, fun)
+			return "wrong_tsr_controller";			
+		}else{
+			console.error("Błędny kontroler tsr: " + arg);
+			console.trace(arg, fun)
+			return "wrong_tsr_controller";
+		}
+	}
+	
+	tsr_controler("rezise", function (){console.log("dds")})
+	
+	// statyczna funkcja zwracająca zaokroglony wynik bez żadnych znaków(nie (-1) tylko (1))
+	function tsr_abs(t) {
+		return Math.abs(t);
+	}
+	
+	// statyczna funkcja zwracająca wynik dodatni(1) lub ujemny(-1) zależnośći od wartość
+	function tsr_sign(t) {
+		return Math.sign(t);
+	}
+	
+	// funkcja zwracająca pozycie elementu wzdłóż ekranu 
+	/*function tsr_screen_position2(arg) {
+		  localToGlobal: function( _el ) {
+		   var target = _el,
+		   target_width = target.offsetWidth,
+		   target_height = target.offsetHeight,
+		   target_left = target.offsetLeft,
+		   target_top = target.offsetTop,
+		   gleft = 0,
+		   gtop = 0,
+		   rect = {};
+
+		   var moonwalk = function( _parent ) {
+			if (!!_parent) {
+				gleft += _parent.offsetLeft;
+				gtop += _parent.offsetTop;
+				moonwalk( _parent.offsetParent );
+			} else {
+				return rect = {
+				top: target.offsetTop + gtop,
+				left: target.offsetLeft + gleft,
+				bottom: (target.offsetTop + gtop) + target_height,
+				right: (target.offsetLeft + gleft) + target_width
+				};
+			}
+		};
+			moonwalk( target.offsetParent );
+			return rect;
+		}
+	}*/
+	/*function inViewport(element) {
+    let bounds = element.getBoundingClientRect();
+    let viewWidth = document.documentElement.clientWidth;
+    let viewHeight = document.documentElement.clientHeight;
+
+    if (bounds['left'] < 0) return false;
+    if (bounds['top'] < 0) return false;
+    if (bounds['right'] > viewWidth) return false;
+    if (bounds['bottom'] > viewHeight) return false;
+
+    return true;
+}*/
+	
+	// klasa css [.tsr-click] po której zostanie wyzwolona funkcjia linku 
+	$(document).on('click', "a.tsr-click", function(e){	
+		//e.preventDefault();
+		
+		// pobranie linku do zmiennej
+		const t = $(event.target);
+		const h = t.closest(".tsr-click").attr("href");
+		
+		// otwieranie linku
+		window.open(href, "_top");
+	});
+	
+	
+	/////////tsr_controler("rezise", function (){inViewport($(document).find('[tsr-content]'));})
+	tsr_controler("rezise", function (){
+		
+		var screenRelativeTop =  $(document).find('[tsr-content]').offset().top - (window.scrollY || 
+                                            window.pageYOffset || document.body.scrollTop);
+
+		var screenRelativeLeft = $(document).find('[tsr-content]').offset().left - (window.scrollX ||
+                                           window.pageXOffset || document.body.scrollLeft);
+		console.log(screenRelativeTop);
+		console.log(screenRelativeLeft);
+		
+	})
+		
+	function tsr_screen_position(arg) {
+		
+		var width_content = arg.outerWidth();
+		var height_content = arg.outerHeight();
+		
+		var left_position = arg.offset().left;
+		var top_position = arg.offset().top ;
+		var right_position = (screenX - ( left_position + width_content ));
+		var bottom_position = (screenY - ( top_position + height_content ));
+		
+		return {
+			left: left_position,
+			top: top_position,
+			right: right_position,
+			bottom: bottom_position
+		}
+	}
+
+	$(function() {
+	
+		// wykrywanie wszystkich danych które zawierają atrybut [tsr-content]
+		//$(document).on('[tsr-content]', tsr_auto_rezise_content);
+		//$('[tsr-content]').on(tsr_auto_rezise_content());
+		////////////////////////////////////////////////////////////////tsr_auto_rezise_content($(document).find('[tsr-content]'));
+		////////////////////////////////////////////tsr_controler("click", function (){tsr_auto_rezise_content($(document).find('[tsr-content]'));})
+		////////////////////////tsr_controler("click", function (){tsr_auto_rezise($(document).find('[tsr-content]'));})
+		//var tsr_content = $(document).find('[tsr-content]');
+		//tsr_auto_rezise_content(tsr_content);
+		//tsr_auto_rezise_content(throttle(tsr_content, 0));
+		
+		// funkcja dostosująca zawartość strony do borderu (loyaut)
+		// żeby zawartość nie wychodziła po za ekran i była dynamiczne dostosowywana
+		function tsr_auto_rezise(event){
+			console.log($(event.currentTarget.offset().left))
+		}
+		function tsr_auto_rezise_content(e){
+			// przypisywanie elementu roboczego do zmiennej
+			var e = $(this);
+			// pobieranie marginesu kontentu
+			var margin = e.attr('tsr-content-margin');
+			var margin_left = e.attr('tsr-content-margin-left');
+			var margin_top = e.attr('tsr-content-margin-top');
+			var margin_right = e.attr('tsr-content-margin-right');
+			var margin_bottom = e.attr('tsr-content-margin-bottom');
+			// sprawdzanie czy znaleziono dany atrybut
+			// jzżeli nie zwracanie 0
+			// zliczanie ze sobą marginesów
+			if(margin === undefined){
+				margin = 0;
+			}else{
+				margin = Number(margin);
+			}
+			if(margin_left === undefined){
+				margin_left += margin;
+			}else{
+				margin_left = Number(margin_left);
+			}
+			if(margin_top === undefined){
+				margin_top += margin;
+			}else{
+				margin_top = Number(margin_top);
+			}
+			if(margin_right === undefined){
+				margin_right += margin;
+			}else{
+				margin_right = Number(margin_right);
+			}
+			if(margin_bottom === undefined){
+				margin_bottom += margin;
+			}else{
+				margin_bottom = Number(margin_bottom);
+			}
+			// zliczanie ze sobą marginesów
+			//margin_left += margin;
+			//margin_top += margin;
+			//margin_right += margin;
+			//margin_bottom += margin;
+			
+			//const classList = e.attr("class");
+			const class_none = e.hasClass('tsr-display-none');
+			console.info(margin_left);
+			console.info(margin_top);
+			console.info(margin_right);
+			console.info(margin_bottom);
+			console.info(class_none);
+			console.info($(document).attr('tsr-content'));
+			console.info(margin);
+			// pobieranie pozycji
+			var width_content = e.outerWidth();
+			var height_content = e.outerHeight();
+			var width_cont = e.width();
+			var height_cont = e.height();
+			var top_height = e.offset().top;
+			var left_width = e.offset().left;
+			var scrol_top = e.scrollTop();
+			var scrol_left = e.scrollLeft();
+			// wyliczenie pozycji po za ekranem
+			console.info(e.clientX);
+			console.info(e.clientX < (e.offset().left + (e.outerWidth() / 2)));
+			console.info(left_width + width_content);
+			console.info(((left_width + width_content) - screenX));
+			var right_width_content = left_width + width_content;
+			var left_width_content = left_width + width_content;
+			var left_width_content_screenX = left_width + width_content - screenX;
+			// wyliczanie pozycji elementu na ekranie
+			if(right_width_content > screenX){
+				console.log("tak");
+				//e.css("left", "");
+				//////e.css("right", 0 + margin + "px");
+				//e.css("right", "0px");
+			}else if(left_width < 0){
+				console.log("tak");
+				//e.css("right", "");
+				//e.css("left", 0 + margin + "px");
+				//e.css("right", "0px");
+			}else{
+				console.log("nie");
+			}
+			
+			console.log(screenWidth);
+			console.log(screenHeight);
+			console.log(screenX);
+			console.log(screenY);
+			console.log(Width);
+			console.log(Height);
+			
+			console.log(e.scrollTop());
+			console.log(e.offset().top);
+			console.log(e.outerWidth());
+			console.log(e.outerHeight());
+			console.log(e.width());
+			console.log(e.height());
+			console.log(e.offset().left);
+			console.log(e.offset().right);
+			console.log(e.offset().bottom);			
+			// sprawdzanie czy funkcja ma 
+			//if()
+			//e.parent().find('[tsr-content]');
+			console.log("wdsss");
+			console.log(this.e);
+			console.log(e);
+			console.log(e.currentTarget);
+			console.log(e.closest());
+			
+			var rect = e.getBoundingClientRect;
+			//var xxx = e.getClientRects();
+			//var xxxx[i]
+			//console.log(xxx);
+			//console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+			// sprawdzanie czy obiekt nie jest schowany
+			if(class_none == false){
+				var width_content = e.outerWidth();
+				var height_content = e.outerHeight();
+				
+				var left_position = e.offset().left;
+				var top_position = e.offset().top ;
+				var right_position = (screenX - ( left_position + width_content ));
+				var bottom_position = (screenY - ( top_position + height_content ));
+				
+				var left_position = Math.abs(left_position);
+				var top_position = Math.abs(top_position);
+				var right_position = Math.abs(right_position);
+				var bottom_position = Math.abs(bottom_position);
+				
+				console.info(left_position);
+				console.info(top_position);
+				console.info(right_position);
+				console.info(bottom_position);
+				
+				var position_absolute = tsr_screen_position(e);
+				//console.info(d1.left);console.info(d1.left);console.info(d1.left);console.info(d1.left);console.info(d1.left);console.info(d1.left);console.info(d1.left);
+				//console.info(d1.top);console.info(d1.top);console.info(d1.top);console.info(d1.top);console.info(d1.top);console.info(d1.top);console.info(d1.top);
+				//console.info(d1.right);console.info(d1.right);console.info(d1.right);console.info(d1.right);console.info(d1.right);console.info(d1.right);
+				//console.info(d1.bottom);console.info(d1.bottom);console.info(d1.bottom);console.info(d1.bottom);console.info(tsr_sign(d1.bottom));
+				
+				console.info(position_absolute.left);console.info(tsr_sign(position_absolute.left));
+				console.info(position_absolute.top);console.info(tsr_sign(position_absolute.top));
+				console.info(position_absolute.right);console.info(tsr_sign(position_absolute.right));
+				console.info(position_absolute.bottom);console.info(tsr_sign(position_absolute.bottom));
+				
+				if(tsr_sign(position_absolute.left) == -1){
+					e.css("left", 0 + margin_left + "px");
+					//e.css("margin-left", 0 + "px");
+				}else if(tsr_sign(position_absolute.top) == -1){
+					e.css("top", 0 + margin_top + "px");
+					//e.css("margin-top", 0 + "px");
+				}else if(tsr_sign(position_absolute.right) == -1){
+					e.css("right", 0 + margin_right + "px");
+					//e.css("margin-right", 0 + "px");
+				}else if(tsr_sign(position_absolute.bottom) == -1){
+					//e.css("top", 0 + position_absolute.top + "px");
+					e.css("bottom", 0 + margin_bottom + "px");
+					//e.css("margin-bottom", 0 + "px");
+				}else if(tsr_sign(position_absolute.left) == 1){
+					e.css("left", "");
+					//e.css("margin-left", "");
+				}else if(tsr_sign(position_absolute.top) == 1){
+					e.css("top", "");
+					//e.css("margin-top", "");
+				}else if(tsr_sign(position_absolute.right) == 1){
+					e.css("right", "");
+					//e.css("margin-right", "");
+				}else if(tsr_sign(position_absolute.bottom) == 1){
+					e.css("bottom", "");
+					//e.css("margin-bottom", "");
+				}else{
+					e.css("left", "");
+					e.css("top", "");
+					e.css("right", "");
+					e.css("bottom", "");
+				}
+			}
+			
+			//console.log(e.parents().find('[tsr-content]'));
+		};
+
+	//tsr_controler("rezise", function (){tsr_fix($('[tsr-content]'));});
+	//tsr_controler("rezise", function (){_constructor();});
+	//tsr_controler("click", function (){_constructor(this);});
+	//////////////////////////////////////////////////////////////////////////////////////////////////$('[tsr-phide]').on("click", _constructor(this));
+  
+  
+	// funkcja szukająca rodzica elementu hovera
+	// funkcja animuje tooltipa rodzica w taki sposów aby był przykleiony do rodzica i był dopasowany do ekranu
+	function _constructor(e){
+		console.log("123321123");
+		// element główny do śledzenia
+		//var tsr_phide = $('[tsr-phide]');
+	/*	console.log(e);
+		console.log(this);
+		var tsr_phide = $(this.e);
+		var tsr_phide_h = tsr_phide.attr('tsr-phide');
+		// element śledzący
+		var tsr_phide_c = tsr_phide.parent().find('[tsr-content]');
+		var tsr_phide_ch = tsr_phide_c.attr('tsr-hide');
+		console.log(tsr_phide);
+		console.log(tsr_phide_c);
+		console.log(tsr_phide_h);
+		console.log(tsr_phide_ch);
+		// sprawdzanie czy dane elementy mają poprawne ustawione byty
+		if(tsr_phide_h == "true"){
+				tsr_phide.attr('tsr-hide', "false");
+			if(tsr_phide_ch == "false"){
+				tsr_phide_c.attr('tsr-hide', "true");
+			};
+		}else{
+			tsr_phide.attr('tsr-hide', "true");
+			if(tsr_phide_ch == "true"){
+				tsr_phide_c.attr('tsr-content', "false");
+			};
+		};
+		// sprawdzanie czy statyczny tooltip jest schowany
+		if(tsr_phide_c.hasClass('tsr-display-none') == true){
+			if(tsr_phide_ch == "true"){
+				tsr_phide_c.attr('tsr-hide', "false");
+				if(tsr_phide_h == "true"){
+					tsr_phide.attr('tsr-phide', "false");
+				};
+			}else{
+				if(tsr_phide_h == "false"){
+					tsr_phide.attr('tsr-phide', "true");
+				};				
+			};
+		}else{
+			if(tsr_phide_ch == "false"){
+				tsr_phide_c.attr('tsr-hide', "true");
+				if(tsr_phide_h == "false"){
+					tsr_phide.attr('tsr-phide', "true");
+				};
+			};
+		};*/
+	}
+	$(_constructor());
+	$(window).change(_constructor());
+	
+		// funkcja dopasowuwująca tooltipa do rozdzielcziśći ekranu
+		function tsr_rezise_tooltip (r, dz){
+			console.log("start tsr tooltip function");
+			console.log($(r));
+			console.log($(dz));
+			dz.css("width", "");
+			dz.css("height", "");
+			dz.css("left", "");
+			dz.css("right", "");
+			dz.css("top", "");
+			dz.css("bottom", "");
+			dz.css("margin-left", "");
+			dz.css("margin-right", "");
+			dz.css("margin-top", "");
+			dz.css("margin-bottom", "");
+			
+						// pobieranie marginesu kontentu
+			var margin = dz.attr('tsr-content-margin');
+			var margin_left = dz.attr('tsr-content-margin-left');
+			var margin_top = dz.attr('tsr-content-margin-top');
+			var margin_right = dz.attr('tsr-content-margin-right');
+			var margin_bottom = dz.attr('tsr-content-margin-bottom');
+			console.log(margin);console.log(margin_left);console.log(margin_top);console.log(margin_right);console.log(margin_bottom);
+			// sprawdzanie czy znaleziono dany atrybut
+			// jzżeli nie zwracanie 0
+			// zliczanie ze sobą marginesów
+			if(margin === undefined){
+				margin = 0;
+			}else{
+				margin = Number(margin);
+			}
+			if(margin_left === undefined){
+				margin_left = margin;
+			}else{
+				margin_left = Number(margin_left);
+			}
+			if(margin_top === undefined){
+				margin_top = margin;
+			}else{
+				margin_top = Number(margin_top);
+			}
+			if(margin_right === undefined){
+				margin_right = margin;
+			}else{
+				margin_right = Number(margin_right);
+			}
+			if(margin_bottom === undefined){
+				margin_bottom = margin;
+			}else{
+				margin_bottom = Number(margin_bottom);
+			}
+			// zliczanie ze sobą marginesów
+			//margin_left += margin;
+			//margin_top += margin;
+			//margin_right += margin;
+			//margin_bottom += margin;
+			
+			//const classList = e.attr("class");
+			const class_none = dz.hasClass('tsr-display-none');
+			console.info(margin_left);
+			console.info(margin_top);
+			console.info(margin_right);
+			console.info(margin_bottom);
+			console.info(class_none);
+			console.info(margin);
+			// pobieranie pozycji rodzica
+			var width_content = r.outerWidth();
+			var height_content = r.outerHeight();
+			var width_cont = r.width();
+			var height_cont = r.height();
+			var top_height = r.offset().top;
+			var left_width = r.offset().left;
+			var scrol_top = r.scrollTop();
+			var scrol_left = r.scrollLeft();
+			// pobieranie pozycji dziecka
+			var width_content_ = dz.outerWidth();
+			var height_content_ = dz.outerHeight();
+			var width_cont_ = dz.width();
+			var height_cont_ = dz.height();
+			var top_height_ = dz.offset().top;
+			var left_width_ = dz.offset().left;
+			var scrol_top_ = dz.scrollTop();
+			var scrol_left_ = dz.scrollLeft();
+			// wyliczenie pozycji po za ekranem
+			console.info(r.clientX);
+			console.info(r.clientY);
+			
+			console.info(width_content);
+			console.info(height_content);
+			console.info(width_cont);
+			console.info(height_cont);
+			console.info(top_height);
+			console.info(left_width);
+			console.info(scrol_top);
+			console.info(scrol_left);
+			
+			console.info(width_content_);
+			console.info(height_content_);
+			console.info(width_cont_);
+			console.info(height_cont_);
+			console.info(top_height_);
+			console.info(left_width_);
+			console.info(scrol_top_);
+			console.info(scrol_left_);
+			
+			console.info(window.outerWidth);
+			console.info(window.outerHeight);
+			console.info(window.innerWidth);
+			console.info(window.innerHeight);
+			
+			
+			console.info(parseInt(event.clientX) > parseInt(left_width + (width_content / 2) + (width_content_ / 2)));
+			console.info(window.innerWidth <= (left_width + (width_content / 2) + (width_content_ / 2)));
+			console.info(window.innerWidth > (left_width + (width_content / 2) + (width_content_ / 2)));
+			console.info(window.innerWidth > left_width + (width_content / 2) + (width_content_ / 2));
+			console.info(window.innerWidth > left_width + ((width_content / 2) + (width_content_ / 2)));
+			console.info(left_width + ((width_content / 2) + (width_content_ / 2)));
+			console.info(left_width + ((width_content / 2) - (width_content_ / 2)));
+			console.info(window.innerWidth < left_width + ((width_content / 2) - (width_content_ / 2)));
+			console.info(window.innerWidth >= (left_width + ((width_content / 2) - (width_content_ / 2))));
+			console.info((left_width + ((width_content / 2) - (width_content_ / 2))));
+			console.info((left_width + ((width_content / 2) + (width_content_ / 2))));
+
+			var scX = window.innerWidth;
+			var scY = window.innerHeight;
+			
+			var lle = (left_width + ((width_content / 2) - (width_content_ / 2))); // pozycja elementu od lewej strony (w px)
+			var ppe = (left_width + ((width_content / 2) + (width_content_ / 2))); // pozycja elementu od lewej strony + element (w px)
+			var tte = (top_height + height_content); // pozycja elementu od góry strony (w px)
+			var bbe = (top_height + ((height_content ) + (height_content_))); // pozycja elementu od góry strony + element (w px)
+			var withe = ((left_width + ((width_content / 2) + (width_content_ / 2))) - scX); // wyliczanie różnicy mędzy elementem a ekranem (w px)
+			var heighte = (top_height + ((height_content ) + (height_content_)) - scY); // wyliczanie różnicy mędzy elementem a ekranem (w px)
+			
+			/*
+			var lle = (left_width + (margin_left + ((width_content / 2) - (width_content_ / 2)))); // pozycja elementu od lewej strony (w px)
+			var ppe = (left_width + (margin_left + (margin_right + ((width_content / 2) + (width_content_ / 2))))); // pozycja elementu od lewej strony + element (w px)
+			var tte = (top_height + (height_content + (margin_top))); // pozycja elementu od góry strony (w px)
+			var bbe = (top_height + (margin_top + (margin_bottom + ((height_content ) + (height_content_))))); // pozycja elementu od góry strony + element (w px)
+			var withe = ((left_width + ((width_content / 2) + (width_content_ / 2))) - scX); // wyliczanie różnicy mędzy elementem a ekranem (w px)
+			var heighte = (top_height + ((height_content ) + (height_content_)) - scY); // wyliczanie różnicy mędzy elementem a ekranem (w px)
+			*/
+
+			console.clear();
+			console.info(top_height /2, top_height, height_content, top_height + height_content, (top_height + height_content) + margin_top, margin_top);
+			
+			console.info(scX, scY, lle, ppe, tte, bbe, withe, heighte);
+			console.info(event.clientX, event.clientY);
+			
+			console.log(scX);
+			console.log(lle);
+			console.log(scX.toString());
+			console.log(lle.toString());
+			console.log(ppe);
+			console.log(ppe.toString());
+			console.log(scY.toString());
+			console.log(tte);
+			console.log(tte.toString());
+			console.log(bbe);
+			console.log(bbe.toString());
+			
+			if(lle.toString() < "0"){
+				console.log(lle);console.log(scX);console.log("lle");
+			}else if(ppe.toString() > scX.toString()){
+				console.log(ppe);console.log(scX);console.log("ppe");
+			}
+			if(lle < 0){
+				console.log(lle);console.log(scX);console.log("lle");
+			}else if(ppe > scX){
+				console.log(ppe);console.log(scX);console.log("ppe");
+			}
+			if("0" < lle.toString()){
+				console.log(lle);console.log(scX);console.log("llee");
+			}else if(scX.toString() > ppe.toString()){
+				console.log(ppe);console.log(scX);console.log("ppee");
+			}
+			
+			// wyliczanie pozycji rodzica
+			if(scX < (left_width + ((width_content / 2) - (width_content_ / 2)))){
+				console.log("left ON");
+			}else if(scX > (left_width + ((width_content / 2) + (width_content_ / 2)))){
+				console.log("right ON");
+			}else if((left_width + ((width_content / 2) + (width_content_ / 2))) < scX){
+				console.log("left ON");
+			}else if((left_width + ((width_content / 2) - (width_content_ / 2))) > scX){
+				console.log("right ON");
+			}else if("1953" > "1920"){
+				console.log("right ON");console.log("left ON");
+			}else if("1953" < "1920"){
+				console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");
+			}else if(1953 > 1920){
+				console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");
+			}else if(1953 < 1920){
+				console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");console.log("right ON");console.log("left ON");
+			}
+			
+			console.log((lle < 0) && (ppe > scX));
+			console.log(((lle < 0) && (ppe > scX)));
+			console.log(lle < 0);
+			console.log(ppe > scX);
+			console.log(scX);
+			console.log(lle);
+			console.log(ppe);
+			console.log(ppe + (--lle));
+			console.log(((((ppe) - withe) - margin_left) - margin_right) + "px");
+			console.log((width_content_ + (margin_left + margin_right)));
+				
+			// zmienna przechowywująca przykleienie do ekranu lle,ppe
+			var llep=false, ppep=false;	
+			
+			// sprawdzanie czy tooltip jest aktywny
+			//if(class_none == false){
+				if((width_content_ + (margin_left + margin_right)) >= scX){
+					console.log(ppe);console.log(scY);console.log("lle&ppe");
+					dz.css("top", ( margin_top) + "px");
+					dz.css("left", 0 + margin_left + "px");
+					dz.css("right", 0 + margin_right + "px");
+					dz.css("width", ((((ppe) - withe) - margin_left) - margin_right) + "px");
+					//dz.css("width", "100px");
+					dz.css("margin-right", "0px");
+					dz.css("margin-left", "0px");
+				}else if(lle < 0){
+					llep = true;
+					console.log(llep);
+					console.log(lle);console.log(scX);console.log("lle");
+					dz.css("top", ( margin_top) + "px");
+					dz.css("left", 0 + margin_left + "px");
+					dz.css("right", "");
+					dz.css("margin-left", "0px");
+					dz.css("margin-right", "");
+				}else if(ppe > scX){
+					ppep = true;
+					console.log(ppep);
+					console.log(ppe);console.log(scX);console.log("ppe");
+					dz.css("top", ( margin_top) + "px");
+					dz.css("right", 0 + margin_right + "px");
+					dz.css("left", "");
+					dz.css("margin-right", "0px");
+					dz.css("margin-left", "");
+				}/*else if((width_content_ + (margin_left + margin_right)) >= scX){
+					console.log(ppe);console.log(scY);console.log("lle&ppe");
+					dz.css("width", ((((ppe) - withe) - margin_left) - margin_right) + "px");
+					//dz.css("width", "100px");
+					dz.css("margin-right", "0px");
+					dz.css("margin-left", "0px");
+				}*/else{
+					dz.css("top", ( margin_top) + "px"); 	
+				}/*else{
+					dz.css("left", "");
+					dz.css("right", "");
+				}*///
+
+				/*if(tte < 0){
+					console.log(lle);console.log(scX);console.log("tte");
+					dz.css("top", 0 + margin_top + "px");
+					dz.css("bottom", "");
+					dz.css("margin-top", "0px");
+					dz.css("margin-bottom", "");
+				}else if(bbe > scY){
+					console.log(ppe);console.log(scX);console.log("bbe");
+					dz.css("bottom", 0 + margin_bottom + "px");
+					dz.css("top", "");
+					dz.css("margin-bottom", "0px");
+					dz.css("margin-top", "");
+				}else if((bbe + tte) > scY){
+					console.log(ppe);console.log(scX);console.log("tte&bbe");
+					dz.css("top", 0 + margin_top + "px");
+					dz.css("bottom", 0 + margin_bottom + "px");
+					dz.css("height", (bbe - heighte) + "px");
+					dz.css("margin-top", "0px");
+					dz.css("margin-bottom", "0px");
+				}else{
+					dz.css("top", "");
+					dz.css("bottom", "");
+				}*/
+				//dz.css("height", "");
+				if(tte < 0){
+					console.log(lle);console.log(scX);console.log("tte");
+					dz.css("top", (tte + margin_top) + "px");
+					dz.css("bottom", "");
+					dz.css("margin-top", "0px");
+					dz.css("margin-bottom", "");
+				}else if((bbe + (margin_top + margin_bottom)) > scY){
+					console.log(ppe);console.log(scX);console.log("tte&bbe");
+					dz.css("top", (tte + margin_top) + "px");
+					dz.css("bottom", 0 + margin_bottom + "px");
+					dz.css("height", ((((bbe - tte) - heighte) - margin_bottom) - margin_top) + "px");
+					dz.css("margin-top", "0px");
+					dz.css("margin-bottom", "0px");
+					//dz.css("margin", "0px");
+				}/*else{
+					dz.css("top", "");
+					dz.css("bottom", "");
+					dz.css("margin-top", "");
+					dz.css("margin-bottom", "");
+					//dz.css("height", "");
+				}*/////
+			//}
+		}
+
+		// funkcja pokazująca i chowająca kontent (tooltip)
+		function tsr_rezcon (event){
+			// funkcja chowająca wszystkie inne statyczne tooltipy
+			tsr_rezcon_hide(this);
+			
+			
+			console.info("999");
+			console.info(event);
+			console.info(event.target);
+			console.info(event.currentTarget);
+			console.info(this);
+			var el = $(this);
+			var previevTarget = $(event.target);
+			console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));console.info(el.attr("tsr-phide"));
+			
+			console.info(previevTarget);console.info(previevTarget);console.info(previevTarget);console.info(previevTarget);console.info(previevTarget.parent);console.info(previevTarget.parent());
+			console.info(previevTarget.parents());console.info(previevTarget.parents());console.info(previevTarget.closest());console.info(previevTarget.closest(".tsr-hide"));console.info(previevTarget.parent(".tsr-hide"));console.info(previevTarget.parents(".tsr-hide"));
+			
+			// sprawdzanie czy nie zostało kliknięte dziecko
+			if(previevTarget.closest(".tsr-hide").hasClass('tsr-display-block') != true ){
+
+				// sprawdzanie czy element ma byt ("tsr-phide")
+				if(el.attr("tsr-phide") == undefined){
+					console.log("takx5");
+					el.attr('tsr-phide', "false");
+					el.find('.tsr-hide').first().attr('tsr-hide', "false");
+					//el.find('.tsr-hide').first().removeClass("tsr-display-none").addClass("tsr-display-block");
+					el.trigger('click');
+					return false;
+				}else{
+					console.log("niex5");
+					
+
+					
+					// ukrywanie wszystkich innych tooltipów
+					////tsr_rezcon2_hdie();
+				
+
+					var tsr_phide = el;
+					var tsr_phide_h = el.attr("tsr-phide");
+					// element śledzący
+					var tsr_phide_c = el.find('.tsr-hide');
+					var tsr_phide_ch = tsr_phide_c.attr('tsr-hide');
+					// sprawdzanie czy nie wystąpił błąd z znalezieniem eventu
+					// jeśli tak powtórzenie działań
+					///////////////////if(tsr_phide_ch == undefined){
+					///////////////////	return tsr_rezcon2(event);
+					/////////}
+					console.log(tsr_phide);
+					console.log(tsr_phide_c);
+					console.log(tsr_phide_h);
+					console.log(tsr_phide_ch);
+					console.info(el.attr("tsr-phide"));
+					console.info(tsr_phide_c.attr("tsr-hide"));
+				
+					if(tsr_phide_c.hasClass('tsr-display-block') == true){
+						tsr_phide_c.addClass("tsr-display-none").removeClass("tsr-display-block");
+						if(tsr_phide_h == "true"){
+							tsr_phide.attr('tsr-phide', "false");
+							if(tsr_phide_ch == "true"){
+								tsr_phide_c.attr('tsr-hide', "false");
+							}
+						}else if(tsr_phide_h == "true"){
+							if(tsr_phide_ch == "true"){
+								tsr_phide_c.attr('tsr-hide', "false");
+							}
+						}
+					}else if(tsr_phide_c.hasClass('tsr-display-none') == true){
+						// funkcja dopasowująca tooltip do ekrannu
+						tsr_rezise_tooltip(el, tsr_phide_c);
+						
+						tsr_phide_c.removeClass("tsr-display-none").addClass("tsr-display-block");
+						if(tsr_phide_h == "false"){
+							tsr_phide.attr('tsr-phide', "true");
+							if(tsr_phide_ch == "false"){
+								tsr_phide_c.attr('tsr-hide', "true");
+							}
+						}else if(tsr_phide_h == "false"){
+							if(tsr_phide_ch == "false"){
+								tsr_phide_c.attr('tsr-hide', "true");
+							}
+						}
+					}
+				
+				}
+			}
+
+			return false;
+		}
+		// funkcja chowająca wszystkie tooltipy
+		function tsr_rezcon_hide (parents){
+			console.info("999888");
+			
+			// dodarodzic do śledzeniasta
+			if(parents != "null"){
+				var ta =  $(".tsr-phide").not(parents);
+			}
+			if(ta.length) {
+				for(var i=0;i<ta.length; i++){
+					console.info(i);
+					console.info(ta[i]);
+					var tsr_phide_c = $(ta[i]).find(".tsr-hide");
+					console.info(i);
+					console.info(tsr_phide_c);
+					if(tsr_phide_c.hasClass('tsr-display-block') == true){
+						console.info("999888");console.info("999888");
+						$(ta[i]).attr('tsr-phide', "false");
+						tsr_phide_c.attr('tsr-hide', "false");
+						tsr_phide_c.addClass("tsr-display-none").removeClass("tsr-display-block");
+					}
+				}
+			}
+			
+			//return false;
+		}
+		
+		// opsługa ukrytego kontentu po kliknięciu
+		$(document).on("click", ".tsr-phide:not(.tsr-hide)", tsr_rezcon);
+		$(document).on("click", function (event) {
+			console.info($(event.target));console.info($(event));
+			if ($(event.target).closest(".tsr-hide").length === 0) {
+				tsr_rezcon_hide();
+				//tsr_auto_rezise_content();
+			}
+		});	
+		//var ees_staron = $(".tsr-phide");
+		//tsr_controler("rezise", tsr_rezise_tooltip(ees_staron, ees_staron.find(".tsr-hide")));
+		tsr_controler("rezise", function(){
+			console.log("this_rezise");
+			var ees_staron = $(".tsr-phide");
+			console.log(ees_staron);
+			//var ees_staron_attr = $(".tsr-phide").attr(".tsr-phide");
+			//var ees_staron = $("[tsr-phide]");
+			//var ees_staron = $('.tsr-phide[class="tsr-display-block"]');
+			//var ees_staron = $('.tsr-phide, .tsr-display-block');
+			//if(tsr-phide)
+			//tsr_rezise_tooltip(ees_staron, ees_staron.find(".tsr-hide"))
+			/*$(".tsr-phide").each(function(){
+				if($(this).find(".tsr-hide").hasClass("tsr-display-block")){
+					tsr_rezise_tooltip($(this), $(this).find(".tsr-hide"))
+				}
+			});*/
+			for(var i = 0; i< ees_staron.length; i++){
+				console.log(ees_staron[i]);
+				if($(ees_staron[i]).find(".tsr-hide").hasClass("tsr-display-block")){
+					tsr_rezise_tooltip($(ees_staron[i]), $(ees_staron[i]).find(".tsr-hide"))
+				}
+			}
+		});
+
+	
+	
+	});	
+
+	function tsr_slider (){
+		console.log("sd" );console.log();
+		console.log(" mouseup touchendmouseup touchendmouseup touchendmouseup touchendmouseup touchendmouseup touchend ");
+		//return {
+			/*right: (function (t){
+				console.log("sd");console.log("sd");console.log("sd");console.log("sd");console.log("sd");console.log("sd");console.log(t);
+			}),*/
+			/*function rg(t){
+				console.log("sd");console.log(t);
+			},*//*
+			tsr_slider.rgg = function(t){
+				console.log("sd");console.log("sd");console.log(t);
+			},*//*
+			this.gg = function(){
+				console.log("sd");console.log("sd");console.log("sd");
+			}*/
+		//}
+		
+		function left(){
+			console.log("left");
+		};
+		function right(){
+			console.log("right");
+		};
+		function slideMove(){
+			console.log("slideMove");
+		};
+		function slideStop(){
+			console.log("slideStop");
+		};
+		
+		return {
+			left: left(),
+			right: right(),
+			slideMove: slideMove(),
+			slideStop: slideStop(),
+		};
+	};
+	
+	var appps = {
+		c: function(){
+			alert("Oopsie! 4");
+		}
+	};
+	appps.c;
+	
+	var tsr = function(t){
+		t();
+	};
+	var tsr_constructor = function(name, prototype){
+		
+	};
+	
+	function SomeConstructor(initialValue) {
+    this.someValue = initialValue;
+	this.s = "a xd nie?";
+	some: {
+		this.sd = "rregi xd";
+	}
+}
+
+var someObject = new SomeConstructor('test');
+
+//alert(someObject.someValue);
+//alert(someObject.s);
+$(function() {
+  var $slider = $(".slider"),
+      $slideBGs = $(".slide__bg"),
+      diff = 0,
+      curSlide = 0,
+      numOfSlides = $(".slide").length-1,
+      animating = false,
+      animTime = 500,
+      autoSlideTimeout,
+      autoSlideDelay = 6000,
+      $pagination = $(".slider-pagi");
+	  
+	var pozCur = 0, // pozycja startowa kursora
+		pozSli = 0, // pozycja slidera (1, 2, 3, 4, itp)
+		posSlider = 0, // pozycia slidera po przeciągnięciu
+		animateSlider = false, // zmienna przechowywująca informacje o animowaniu slider
+		animSli = 500, // czas animowania funkcji
+		activeEvent = false, // przechowywanie eventu działania slidera 
+		pozmaxSlider = 2; // pozycja maksywalna slidera pokazuję maksywalne przesunięcie slidera [zawsze liczone od 0] zawsze (-1)
+		
+	
+	function tsr_slider_left(event){		
+		if(pozSli > 0){ 
+			pozSli--
+		};
+		
+		tsr_slider_slideStop(event);		
+	}
+	function tsr_slider_right(event){	
+		if(pozSli < pozmaxSlider){
+			pozSli++
+		};;
+		
+		tsr_slider_slideStop(event);
+	}
+	function tsr_slider_slideMove(e){
+		
+	}
+	function tsr_slider_slideStop(event){
+		if(event === undefined){
+			var slider = $(".tsr-pslider");
+		}else{
+			var slider = $(event).closest(".tsr-pslider");
+		};
+		
+		var slider_active = $(".tsr-pslider-active");
+		
+		slider_active.addClass("tsr-pslider-animate");
+		animateSlider = true;
+		slider_active.removeClass("tsr-pslider-active");
+		
+		slider_active = $(".tsr-pslider-animate");
+		slider_active_slider = slider_active.find(".tsr-slider");
+		
+		slider_active_slider.css("transform", "translate3d("+ (-pozSli*100) +"%,0,0)");
+		slider_active_slider.css("transition", "all "+ animSli +"ms ease 0s");
+		slider_active.attr("tsr-element-position", pozSli);
+
+			if(pozSli > 0){ 
+				$(".tsr-pslider-animate").find(".tsr-slider-left").removeClass("tsr-display-none").addClass("tsr-display-block");
+				$(".tsr-pslider-animate").find(".tsr-slider-right").removeClass("tsr-display-none").addClass("tsr-display-block");
+			};	
+			if(pozSli == 0){ 
+				$( ".tsr-pslider-animate").find(".tsr-slider-left").addClass("tsr-display-none").removeClass("tsr-display-block");
+			};	
+			if(pozSli == pozmaxSlider){ 
+				$( ".tsr-pslider-animate").find(".tsr-slider-right").addClass("tsr-display-none").removeClass("tsr-display-block");
+			};	
+		
+		setTimeout(function(){
+			animateSlider = false;
+			slider_active_slider.css("transition", "");
+			slider_active.removeClass("tsr-pslider-animate");
+		}, animSli);
+		
+	}
+	
+	// opsługo slidera
+	$(document).on("click", ".tsr-slider-left", function(event){
+		if(activeEvent == false){
+			activeEvent = true;
+			tsr_slider_left(event);
+			setTimeout(function(){
+				activeEvent = false;
+			}, animSli);
+		}
+	});
+	$(document).on("click", ".tsr-slider-right", function(event){
+		if(activeEvent == false){
+			activeEvent = true;
+			tsr_slider_right(event);
+			setTimeout(function(){
+				activeEvent = false;
+			}, animSli);
+		};
+	});
+	
+	$(document).on("mousedown touchstart", ".tsr-pslider", function(event) {
+		if(animateSlider == false){
+				$(this).addClass("tsr-pslider-active");
+				
+				// pobieranie maksymalnego przesunięca slidera
+				if($(this).attr("tsr-element-max-position") != undefined){
+					// sprawdzanie czy dany vartość konfiguracyjna jest liczbą całą
+					//if(Number.isInteger($(this).attr("tsr-element-max-position")) == true){
+						pozmaxSlider = (($(this).attr("tsr-element-max-position")) - 1); // ustawianie maxymalnej pozycji slidera
+					//}
+				}
+				
+				// sprawdzanie czy dany slider ma konfiguracjie
+				if($(this).attr("tsr-element-position") === undefined){
+					$(this).attr("tsr-element-position", pozSli); // ustawienie konfiguracji pozycji startowej slidera
+				}else{
+					pozSli = $(this).attr("tsr-element-position"); // pobieranie pozycji slidera
+				}
+			
+				var pozCur = event.pageX || event.originalEvent.touches[0].pageX,
+				widMon = $(window).width();
+				//posSlider = $(this).attr("tsr-element-position");
+				posSlider = 0;
+			
+			tsr_slider_slideMove(event);
+			$(".tsr-pslider").on("mousemove touchmove", function(event) {
+				
+				var x = event.pageX || event.originalEvent.touches[0].pageX; 
+				
+				console.log(pozCur, x, posSlider);
+				
+				posSlider = (pozCur - x) / widMon * 100 ;
+				console.log(posSlider, (-pozSli*100 - posSlider), pozSli, pozmaxSlider);
+		  
+				$(".tsr-pslider-active").find(".tsr-slider").css("transform", "translate3d("+ (-pozSli*100 - posSlider) +"%,0,0)");
+			});
+		};
+	});
+	$(document).on("mouseup touchend", function(e) {
+		// usunięcie binduów na sliderze (myszki, dotyku)
+		$( ".tsr-pslider-active").off("mousemove touchmove");
+		if(animateSlider == false){
+			if (posSlider > -8 && posSlider < 8) {
+				tsr_slider_slideStop();
+				return;
+			}
+			if (posSlider <= -8) {
+				tsr_slider_left();
+				
+				if(pozSli > 0){ 
+					$( ".tsr-pslider-active").find(".tsr-slider-left").removeClass("tsr-display-none").addClass("tsr-display-block");
+				};				
+			}
+			if (posSlider >= 8) {
+				tsr_slider_right();
+				
+				if(pozSli == 0){ 
+					$( ".tsr-pslider-active").find(".tsr-slider-left").addClass("tsr-display-none").removeClass("tsr-display-block");
+				};
+				
+			}		
+		};
+	});	
+});	
+
+	/* funckja opługująca modal box (tsr) */
+	var ileModal = 0; // zmienna przechowuje ilość otworzonych modal boxów (otwieranie tego samego nie nowego)
+	
+	function tsr_modal(t){
+		console.log("modal open");
+		
+		$("html, body").css("overflow", "hidden");
+		
+		var pmodal = $(this);
+		var modal = pmodal.find(".tsr-modal");
+		var modal_html = modal.html();
+		var modalPi = modal.attr("tsr-modal-pi");
+		var modalI = $('div.tsr-modal-container[tsr-modal-i="'+ modal.attr("tsr-modal-pi") +'"]').attr("tsr-modal-i");
+		var modal_container = $('div.tsr-modal-container[tsr-modal-i="'+ modal.attr("tsr-modal-pi") +'"]');
+		var modal_closed = false;
+		console.log(modal.attr("tsr-modal-pi"));
+		console.log($('div.tsr-modal-container[tsr-modal-i="'+ modal.attr("tsr-modal-pi") +'"]').attr("tsr-modal-i"));
+		
+		// sprawdzanie czy są ustawionę opcjie modal moxa
+		var modal_close = modal.attr("tsr-modal-close");
+		console.log((modalPi == modalI));
+		
+		//
+		// sprawdzanie czy istnieje taki modal
+		/*if(modalPi == undefined){
+			if(modalPi == modalI){
+			
+		}*/
+		
+		if((modalPi != undefined)){
+			$('div.tsr-modal-container[tsr-modal-i="'+ modal.attr("tsr-modal-pi") +'"]').removeClass("tsr-display-none").addClass("tsr-display-block").addClass("tsr-modal-active");		
+		}if((modalPi == modalI) && (modalPi != undefined)){
+			$('div.tsr-modal-container[tsr-modal-i="'+ modal.attr("tsr-modal-pi") +'"]').removeClass("tsr-display-none").addClass("tsr-display-block").addClass("tsr-modal-active");
+		}else{
+			modal.attr("tsr-modal-pi", ileModal); // dodawanie zliczania modal boxa
+			
+			//console.log(modal_html);
+			
+			$("body").append('<div class="tsr-modal-container tsr-modal-active"> <div class="tsr-modal-container-content"> '+ modal_html +' <div class="tsr-modal-close tsr-modal-closed-button"></div> </div> </div>').closest().appendTo("sd");
+			
+			$(".tsr-modal-active").attr("tsr-modal-i", ileModal); // dodawanie zliczania modal boxa
+			ileModal++ // dodawanie o jeden liczy modal boxów
+
+			// wykonywanie ustawień modal boxa
+			//console.log(modal_close, modal_closed);
+			if(modal_close === undefined){
+				modal_closed = false;
+			}else{
+				if(modal_close == "true"){
+					$(".tsr-modal-active").addClass("tsr-modal-closed");
+				}else if(modal_close == "false"){
+					$(".tsr-modal-active").removeClass("tsr-modal-closed");
+				}
+			};
+			
+			//console.log($(this).find(".tsr-modal"));
+		
+		}
+		
+		return false;
+	}
+	function tsr_modal_hide(t = false){
+		console.log("modal close");
+		$("html, body").css("overflow", "");
+		// sprawdzanie czy modal jest do usunięcia
+		if($(".tsr-modal-active").hasClass("tsr-modal-closed") == true){
+			$(".tsr-modal-active").remove();
+		}else{
+			if(t == true){
+				$(".tsr-modal-active").remove();
+			}else{
+				$(".tsr-modal-active").addClass("tsr-display-none").removeClass("tsr-display-block").removeClass("tsr-modal-active");
+			}
+		}
+	}
+
+	// opsługa modal box'a po kliknięciu
+	$(document).on("click", ".tsr-pmodal", tsr_modal); // pokazywanie modal boxa
+	$(document).on("click", function (event) { // ukrywanie modal boxa po kliknięciu na overlay
+		console.info($(event.target));console.info($(event));
+		if ($(event.target).closest(".tsr-modal-container-content").length === 0) {
+			tsr_modal_hide();
+		}
+	});
+	$(document).on("click", ".tsr-modal-closed-button", tsr_modal_hide); // ukrywanie modal boxa
+
+
+	//function myFunction(x) {
+	//	x.classList.toggle("change");
+	//}
+	
+	
+ // $("#tsr-nav-menu-mobile").click(function(){
+ //   $('#tsr-menu-mobile-nav').stop().slideToggle(300);
+ // }); 
+
+ // $("#tsr-nav-menu-mobile").click(function(){
+ //   $("#tsr-menu-mobile-nav").stop().slideToggle(300);
+ // }); 
+
+	//$( "#tsr-nav-menu-mobile" ).click(function() {
+	//	$(this).addClass( "#tsr-menu-mobile-contain" );
+   // });
+	
+	
+	
+	//$( "#tsr-nav-menu-mobile" ).toggle(function() {
+	//	 $("div").addClass("important");
+	//});
+	
+	
+	//$(".tsr-button-menu-mobile").click(function(){
+	//	$(".tsr-nav-menu-mobile").toggleClass("tsr-nav-menu-mobile-toogle");
+	//});
+	
+	// menu mobile ON //
+	
+	$(document).ready(function(){
+	
+		$(".tsr-button-menu-mobile").click(function(){
+			$(".tsr-button-menu-mobile").toggleClass("change");
+			$(".tsr-nav-menu-mobile").toggleClass("tsr-nav-menu-mobile-toogle");
+		});
+	
+	});
+
+	// menu mobile OFF //
+	
+	// menu left ON //
+	
+	$(document).ready(function(){
+	
+		$(".tsr-button-menu-left").click(function(){
+			$(".tsr-button-menu-left").toggleClass("change");
+			$(".tsr-nav-menu-left").toggleClass("tsr-nav-menu-visable");
+			$(".viewport").animate({width: "100%"}, 1000);
+			//$(".menu-left-hover").fadeIn(1000);
+		});
+	
+	});
+  
+	// menu left OFF //
+  
+	// menu right ON //
+
+	$(document).ready(function(){
+		
+		$(".tsr-button-menu-right").click(function(){
+			$(".tsr-button-menu-right").toggleClass("change");
+			$(".tsr-nav-menu-right").toggleClass("tsr-nav-menu-visable");
+			$(".viewport").animate({width: "100%"}, 1000);
+		});
+	
+	});
+	
+	// menu right OFF //
+	
+	// menu left minimalize ON //
+	
+	$(document).ready(function(){
+	
+		$(".tsr-button-menu-left-minimalize").click(function(){
+			$(".tsr-nav-menu-left").toggleClass("tsr-nav-menu-left-minimalize");
+			$(".tsr-stopka-navigation-right").toggleClass("tsr-navigation-right-minimalize");
+			$(".container-right").toggleClass("tsr-navigation-right-minimalize");
+			$(".tsr-nav-menu-size").toggleClass("tsr-display-none");
+			$(".tsr-nav-menu-size2").toggleClass("tsr-display-none");
+			if ($(".tsr-button-menu-left-minimalize").find(".tsr-nav-menu-size").hasClass("tsr-display-none")){
+				document.cookie = "left_navbar_tsr=1";
+			}else{
+				document.cookie = "left_navbar_tsr=0";
+			}		
+		});
+	
+	});
+  
+	// menu left minimalize OFF //
+	
+	// menu right minimalize ON //
+
+	$(document).ready(function(){
+		
+		$(".tsr-button-menu-right-minimalize").click(function(){
+			$(".tsr-nav-menu-right").toggleClass("tsr-nav-menu-right-minimalize");
+			$(".tsr-stopka-navigation-left").toggleClass("tsr-navigation-left-minimalize");
+			$(".container-left").toggleClass("tsr-navigation-left-minimalize");
+			$(".tsr-nav-menu-size").toggleClass("tsr-display-none");
+			$(".tsr-nav-menu-size2").toggleClass("tsr-display-none");
+			if ($(".tsr-button-menu-right-minimalize").find(".tsr-nav-menu-size").hasClass("tsr-display-none")){
+				document.cookie = "right_navbar_tsr=1";
+			}else{
+				document.cookie = "righr_navbar_bm=0";
+			}
+		});
+	
+	});
+	
+	// menu right minimalize OFF //	
+
+	// pokaż kafelki albo tabelkę przy renderowaniu strony w zależnośći na co kliknie użytkownik //
+
+	$(document).ready(function(){
+		
+		$(".tsr-click-tabelka").click(function(){
+			$(".tsr-recors-table").toggleClass("tsr-display-none");
+			$(".tsr-recors-miniaturs").toggleClass("tsr-display-none");
+			$(".tsr-records-title").toggleClass("tsr-display-none");
+			$(".tsr-records-submit").toggleClass("tsr-display-none");
+		});
+		
+		$(".tsr-click-kafelki").click(function(){
+			$(".tsr-recors-table").toggleClass("tsr-display-none");
+			$(".tsr-recors-miniaturs").toggleClass("tsr-display-none");
+			$(".tsr-records-title").toggleClass("tsr-display-none");
+			$(".tsr-records-submit").toggleClass("tsr-display-none");
+		});
+	
+	});
+	
+	// menu right minimalize OFF //	
+
+	// funkcjia ciasteczek ON //
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+	
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}	
+	// funkcjia ciasteczek OFF //
+
+	// ciosteczko do zapamiętywania wysuniętego menu admina ON //
+
+	$(document).ready(function(){
+		if (getCookie("left_navbar_tsr") == 1){
+			$(".tsr-nav-menu-left").addClass("tsr-nav-menu-left-minimalize");
+			$(".tsr-stopka-navigation-right").addClass("tsr-navigation-right-minimalize");
+			$(".container-right").addClass("tsr-navigation-right-minimalize");
+			$(".tsr-nav-menu-size").addClass("tsr-display-none");
+			$(".tsr-nav-menu-size2").addClass("tsr-display-none");
+		}
+		if (getCookie("right_navbar_tsr") == 1){
+			$(".tsr-nav-menu-right").addClass("tsr-nav-menu-right-minimalize");
+			$(".tsr-stopka-navigation-left").addClass("tsr-navigation-left-minimalize");
+			$(".container-left").addClass("tsr-navigation-left-minimalize");
+			$(".tsr-nav-menu-size").addClass("tsr-display-none");
+			$(".tsr-nav-menu-size2").addClass("tsr-display-none");
+		}
+	});
+	
+	// ciosteczko do zapamiętywania wysuniętego menu admina OFF //
+	
+	// kontener ze kontem użytkownika i aplikacjiami timonix.pl ON //
+	$(document).ready(function(){
+		$(".timonix-aplication-box-item").hover(function() {
+			 //$(this).fadeIn(500).delay(1000).css("background-color", "gray").delay(1000);
+		}, function(){
+			$(this).delay(1000).css("background-color", "").delay(1000);
+		});
+		$(".timonix-aplication-box-item").hover(function() {
+			 $(this).removeClass("timonix-aplication-box-item").addClass("timonix-aplication-box-item-active");
+			 //$(this).removeClass("timonix-aplication-box-item");
+		}, function(){
+			 $(this).addClass("timonix-aplication-box-item").removeClass("timonix-aplication-box-item-active");
+			 //$(this).addClass("timonix-aplication-box-item-active");
+		});
+		$(".timonix-aplication-box-navigation").hover(function() {
+			 //$(this).closest("timonix-aplication-container").find(".timonix-aplication-box").removeClass("tsr-display-none").addClass("tsr-display-block");
+		}, function(){
+			 //$(this).closest("timonix-aplication-container").find(".timonix-aplication-box").addClass("tsr-display-none").removeClass("tsr-display-block");
+		});
+		/*$(document).on("click", ".timonix-aplication-box-navigation", function(oEvent){
+			 $(".timonix-aplication-box-content").toggleClass("tsr-display-none-left");
+			 console.log( $(".timonix-aplication-box-content"));
+			 return false;
+		})
+		$(document).on("click", function (event) {
+			if ($(event.target).closest(".timonix-aplication-box-content").length === 0) {
+				$(".timonix-aplication-box-content").addClass("tsr-display-none-left");
+			}
+		});
+		
+		$(document).on("click", ".menu-avatar-container", function(oEvent){
+			 $(".menu-avatar-container-content").toggleClass("tsr-display-none-left");
+			 console.log( $(".menu-avatar-container-content"));
+			 tsr_auto_rezise_content(this);
+			 return false;
+		})
+		$(document).on("click", function (event) {
+			if ($(event.target).closest(".menu-avatar-container-content").length === 0) {
+				$(".menu-avatar-container-content").addClass("tsr-display-none-left");
+			}
+		});*/
+		$(document).on("click", ".timonix-aplication-box-navigation", function(oEvent){
+			 ////////////$(".timonix-aplication-box-content").toggleClass("tsr-display-none").toggleClass("tsr-display-block");
+			 ////////////console.log( $(".timonix-aplication-box-content"));
+			 //return false;
+		})
+		$(document).on("click", function (event) {
+			if ($(event.target).closest(".timonix-aplication-box-content").length === 0) {
+				///////////////////////////////////////////////////////////////////$(".timonix-aplication-box-content").addClass("tsr-display-none").removeClass("tsr-display-block");
+			}
+		});
+
+		$(document).on("click", ".menu-avatar-container", function(oEvent){
+			 ////////////////////////////////////////////////$(".menu-avatar-container-content").toggleClass("tsr-display-none").toggleClass("tsr-display-block");
+			 //console.log( $(".menu-avatar-container-content"));
+			 //return false;
+		})
+		$(document).on("click", function (event) {
+			if ($(event.target).closest(".menu-avatar-container-content").length === 0) {
+				/////////////////////////////$(".menu-avatar-container-content").addClass("tsr-display-none").removeClass("tsr-display-block");
+			}
+		});
+		
+		
+		//console.log(document.currentTarget);
+		//console.log(document.currentTarget.offset());
+		//console.log(document.outerWidth());
+	});
+
+	
+	// kontener ze kontem użytkownika i aplikacjiami timonix.pl OFF //
+	
+	// toltip statyczny i podażający za myszką ON //
+	
+	// sprawdzanie czy istnieje toltip do wyświetlenia
+	var tsr_tooltip = $(document).find('section[tsr-toltip]');
+	//this.mousemove(tsr_toltip);
+	console.log(tsr_tooltip);
+	
+	console.log($('#container').find('section[tsr-toltip]'));
+	
+	function tsr_toltip(event){
+		console.log(event);
+	}
+	
+	//console.log(instanceOfMouseEvent.clientX);
+	//console.log(instanceOfMouseEvent.clientY);
+	//console.log(instanceOfMouseEvent.screenX);
+	//console.log(instanceOfMouseEvent.screenY);
+	//var tsr_mause_x = $(document).find('section[tsr-content]');
+	var tsr_content = $(document).find('[tsr-content]');
+	var tsr_content_maargin = tsr_content.find('[tsr-content-maargin]');
+	//////////tsr_content.hide();
+	//////////////////////tsr_controler("rezise", function (){tsr_content.hide()});
+	console.log(tsr_content_maargin);
+	console.log(tsr_content);
+	var element_height = tsr_content.offsetWidth;
+	console.log(tsr_content.outerWidth());
+	//var intElemOffsetWidth = document.getElementById("sd").scrollWidth;
+	console.log(tsr_content.scrollWidth);
+
+	$(document).ready(function(){
+		var tsr_content = $(document).find('section[tsr-content]');
+			var tsr_content = $(document).find('[tsr-content]');
+	var tsr_content_maargin = tsr_content.find('[tsr-content-maargin]');
+	//////////////////tsr_content.hide();
+	/////////////////////tsr_controler("rezise", function (){tsr_content.hide()});
+	
+
+	
+		
+		// pobieranie danych z dokumentu
+		const dokument = $(document); 
+		const header = $("header");
+		const main = $("main"); 
+		
+		// pobieranie elementów klass fixed-to-scroll
+		var menu = $(".fixed-to-scroll");
+		
+		// funkcjia na ustawianie menu na fixed po skrolowanie 
+		
+		
+			
+			// aktualna wartość scrola
+			const scrollPos = dokument.scrollTop();
+			// aktualna pozycia maina
+			const mainOffest = main.offset().top;
+			// aktualna pozycia hedera
+			const headerHeight = header.outerHeight();
+			console.log(tsr_content.scrollTop());
+			console.log(tsr_content.offset().top);
+			console.log(tsr_content.outerWidth());
+			console.log(tsr_content.outerHeight());
+			console.log(tsr_content.width());
+			console.log(tsr_content.height());
+			console.log(tsr_content.offset().left);
+			console.log(tsr_content.offset().left);
+	
+		$(document).on("mousemove", function(e){
+			console.log(e.clientX);
+		});
+	
+		window.addEventListener("resize", function() {
+			console.log(this);
+			console.log(this.innerWidth);
+			console.log(this.innerHeight);
+		});
+	
+	});
+	
+	// toltip statyczny i podażający za myszką ON //
+	
+	
+	 // var throttled = _.throttle(trackMove, 0);
+	//$(".menu-avatar-container").on("rezise", trackMove(this));
+
+
+ function trackMove(event) {
+	 console.log(event);
+     currentTarget = $(event.currentTarget)
+	 console.log(currentTarget);
+     tooltip = currentTarget.closest().find(".menu-avatar-container-content")
+	 console.log(tooltip);
+     //  if the mouse pointer is between 
+     currentTargetRight = currentTarget.offset().left + currentTarget.outerWidth()
+     tooltipWidth = tooltip.outerWidth()
+
+     $(".console").html("event.clientX = " + event.clientX.toString() + "<br/>");
+     $(".console").append("currentTargetRight - (tooltip.outerWidth()) = " + (currentTargetRight - (tooltip.outerWidth())).toString() + "<br/>");
+     $(".console").append("currentTargetRight = " + currentTargetRight + "<br/>");
+     if (event.clientX < (currentTarget.offset().left + (tooltip.outerWidth() / 2))) {
+         tooltip.css("left", "0px");
+         tooltip.css("right", "");
+        
+     } else if (event.clientX > (currentTargetRight - (tooltip.outerWidth() / 1.5))) {
+         tooltip.css("right", "0px");
+         tooltip.css("left", "");
+       
+
+     } else if (event.clientX > (currentTarget.offset().left + (tooltip.outerWidth() / 2)) && event.clientX < (currentTargetRight - (tooltip.outerWidth() / 2))) {
+        
+         tooltip.css("left", parseInt(event.clientX) - (tooltip.outerWidth() / 2) + "px");
+         tooltip.css("right", "");
+         
+
+     }
+
+ }
+ 
+  /*$( function() {
+    function position() {
+      $( ".menu-avatar-container-content" ).position({
+        //of: $( "#parent" ),
+        //my: $( "#my_horizontal" ).val() + " " + $( "#my_vertical" ).val(),
+        //at: $( "#at_horizontal" ).val() + " " + $( "#at_vertical" ).val(),
+        collision: $( ".menu-avatar-container-content" ).val() + " " + $( ".menu-avatar-container-content" ).val()
+      });
+    }
+ 
+    $( ".menu-avatar-container-content" ).css( "opacity", 0.5 );
+ 
+ 
+    position();
+  } );*/
+  
+  /*tsr_controler("rezise", function (){tsr_fix($('[tsr-content="tsr"]'));});
+  
+  function tsr_fix(event){
+		console.log(event);
+		console.log("abs");
+		currentTarget = $(event.currentTarget)
+		console.log(currentTarget);
+		tooltip = currentTarget.closest().find(".menu-avatar-container-content")
+		console.log(tooltip);
+		//  if the mouse pointer is between 
+		currentTargetRight = event.offset().left + event.outerWidth()
+		tooltipWidth = event.outerWidth()
+		
+		console.log(currentTargetRight);
+		console.log(tooltipWidth);
+  }*/
+  
+(function ($) {
+
+    $.fn.easyTooltip = function (options) {
+
+        // default configuration properties
+        var defaults = {
+            xOffset: 10,
+            yOffset: 35,
+            tooltipId: "easyTooltip",
+            content: "fg",
+            useElement: "fg"
+        };
+
+        var options = $.extend(defaults, options);
+        var content;
+
+        this.each(function () {
+            $(this).hover(function (e) {
+                content = (options.useElement != "") ? $("#" + options.useElement).html() : content;
+                if (content != "" && content != undefined) {
+                    var $tooltip = $("<div id='" + options.tooltipId + "'>" + content + "</div>");
+                    $("body").append($tooltip);
+
+                    if ($(window).width() < (e.pageX + $tooltip.width() + options.xOffset)) {
+                        $tooltip
+                            .css("top", (e.pageY - options.yOffset) + "px")
+                            .css("left", (e.pageX - $tooltip.outerWidth() - options.xOffset) + "px")
+                            .show();
+                    } else {
+                        $tooltip
+                            .css("top", (e.pageY - options.yOffset) + "px")
+                            .css("left", (e.pageX + options.xOffset) + "px")
+                            .show();
+                    }
+                }
+            },
+            function () {
+                $("#" + options.tooltipId).remove();
+            });
+            $(this).mousemove(function (e) {
+                var $tooltip = $("#" + options.tooltipId);
+                if ($(window).width() < (e.pageX + $tooltip.width() + options.xOffset)) {
+                    $tooltip
+                            .css("top", (e.pageY - options.yOffset) + "px")
+                            .css("left", (e.pageX - $tooltip.outerWidth() - options.xOffset) + "px")
+                            .show();
+                } else {
+                    $tooltip
+                            .css("top", (e.pageY - options.yOffset) + "px")
+                            .css("left", (e.pageX + options.xOffset) + "px")
+                            .show();
+                }
+            });
+        });
+
+    };
+
+})(jQuery);

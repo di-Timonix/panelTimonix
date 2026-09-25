@@ -1,0 +1,8 @@
+[
+	'name' => $_FILES["file"]["name"],
+	'autor' => $_SESSION['nick'],
+	'data_upload' => $date,
+	'opis' => "",
+	'rozszerzenie' => $_FILES["file"]['type'],
+	'sciezka' => $target_file2,
+]

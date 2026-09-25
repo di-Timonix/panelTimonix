@@ -1,0 +1,156 @@
+/*
+	sortable by Timonix 
+	versions V.0.1
+*/
+
+
+	/* use to html,body style */
+/*html { margin: 0; padding: 0; }
+body { font-size: 100%; margin: 0; padding: 1.75em; font-family: 'Helvetica Neue', Arial, sans-serif; }*/
+
+.cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+
+.cf { zoom: 1; }
+
+*:first-child .cf { zoom: 1; }
+
+/*h1 { font-size: 1.75em; margin: 0 0 0.6em 0; }*/
+
+/*a { color: #2996cc; }
+a:hover { text-decoration: none; }
+
+p { line-height: 1.5em; }*/
+.small { color: #666; font-size: 0.875em; }
+.large { font-size: 1.25em; }
+
+/**
+ * Sortiner
+ */
+
+.sortiner { position: relative; display: block; margin: 0; padding: 0; max-width: 600px; list-style: none; font-size: 13px; line-height: 20px; }
+
+.sortiner-list { display: block; position: relative; margin: 0; padding: 0; list-style: none; }
+.sortiner-list .sortiner-list { padding-left: 30px; }
+.sortiner-collapsed .sortiner-list { display: none; }
+
+.sortiner-item,
+.sortiner-empty,
+.sortiner-placeholder { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 13px; line-height: 20px; width: 100%; }
+	*,.sortiner-placeholder*, *.sortiner-placeholder, .sortiner-placeholder, .sortiner-placeholder::before, .sortiner-placeholder::after, .sortiner-placeholder:hover {
+		-webkit-transition-property: unset; /* Safari */
+		-webkit-transition-duration: 0s; /* Safari */
+		-webkit-transition-delay: 0s; /* Safari */
+		transition-property: unset;
+		transition-duration: 0s;
+		transition-delay: 0s;
+		-webkit-animation-delay: 0s; /* Safari 4.0 - 8.0 */
+		animation-delay: 0s;
+	}
+
+.sortiner-handle { display: block; height: 30px; margin: 5px 0; padding: 5px 10px; color: #333; text-decoration: none; font-weight: bold; border: 1px solid #ccc;
+    background: #fafafa;
+    background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:    -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:         linear-gradient(top, #fafafa 0%, #eee 100%);
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    box-sizing: border-box; -moz-box-sizing: border-box;
+}
+.sortiner-handle:hover { color: #2ea8e5; background: #fff; }
+
+.sortiner-item > button { display: block; position: relative; cursor: pointer; float: left; width: 25px; height: 20px; margin: 5px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; box-shadow: inset 0 0 0px 0px black}
+.sortiner-item > button:before { content: '+'; display: block; position: absolute; width: 100%; text-align: center; text-indent: 0; color: black; }
+.sortiner-item > button[data-action="collapse"]:before { content: '-'; color: black; }
+.sortiner-rename > .sortiner-rename-button {top: -35px;right: 5px;float: right; display: block; position: relative; cursor: pointer; width: 25px; height: 20px; margin: 5px 0; padding: 0; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; box-shadow: inset 0 0 0px 0px black}
+.sortiner-rename-section {
+    background-color: #ececec;
+	padding: 10px;
+}
+
+.sortiner-placeholder,
+.sortiner-empty { margin: 5px 0; padding: 0; min-height: 30px; background: #f2fbff; border: 1px dashed #b6bcbf; box-sizing: border-box; -moz-box-sizing: border-box; }
+.sortiner-empty { border: 1px dashed #bbb; min-height: 100px; background-color: #e5e5e5;
+    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
+                      -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image:    -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
+                         -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image:         linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
+                              linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
+.sortiner-dragel { position: absolute; pointer-events: none; z-index: 9999; }
+.sortiner-dragel > .sortiner-item .sortiner-handle { margin-top: 0; }
+.sortiner-dragel .sortiner-handle {
+    -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
+            box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
+}
+
+/**
+ * Sortiner Extras
+ */
+
+.sortiner-lists { display: block; clear: both; padding: 30px 0; float: left; width: 100%; border: 0; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd; }
+
+#sortiner-menu { padding: 0; margin: 20px 0; }
+
+#sortiner-output,
+#sortiner2-output { width: 100%; height: 7em; font-size: 0.75em; line-height: 1.333333em; font-family: Consolas, monospace; padding: 5px; box-sizing: border-box; -moz-box-sizing: border-box; }
+
+#sortiner2 .sortiner-handle {
+    color: #fff;
+    border: 1px solid #999;
+    background: #bbb;
+    background: -webkit-linear-gradient(top, #bbb 0%, #999 100%);
+    background:    -moz-linear-gradient(top, #bbb 0%, #999 100%);
+    background:         linear-gradient(top, #bbb 0%, #999 100%);
+}
+#sortiner2 .sortiner-handle:hover { background: #bbb; }
+#sortiner2 .sortiner-item > button:before { color: #fff; }
+
+@media only screen and (min-width: 700px) {
+
+    .sortiner { width: 100%; }
+    .sortiner + .sortiner { margin-left: 2%; }
+
+}
+
+.sortiner-hover > .sortiner-handle { background: #2ea8e5 !important; }
+
+/**
+ * Sortiner Draggable Handles
+ */
+
+.sortiner3-content { display: block; height: 30px; margin: 5px 0; padding: 5px 10px 5px 40px; color: #333; text-decoration: none; font-weight: bold; border: 1px solid #ccc;
+    background: #fafafa;
+    background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:    -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:         linear-gradient(top, #fafafa 0%, #eee 100%);
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    box-sizing: border-box; -moz-box-sizing: border-box;
+}
+.sortiner3-content:hover { color: #2ea8e5; background: #fff; }
+
+.sortiner-dragel > .sortiner3-item > .sortiner3-content { margin: 0; }
+
+.sortiner3-item > button { margin-left: 30px; }
+
+.sortiner3-handle { position: absolute; margin: 0; left: 0; top: 0; cursor: pointer; width: 30px; text-indent: 100%; white-space: nowrap; overflow: hidden;
+    border: 1px solid #aaa;
+    background: #ddd;
+    background: -webkit-linear-gradient(top, #ddd 0%, #bbb 100%);
+    background:    -moz-linear-gradient(top, #ddd 0%, #bbb 100%);
+    background:         linear-gradient(top, #ddd 0%, #bbb 100%);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.sortiner3-handle:before { content: '≡'; display: block; position: absolute; left: 0; top: 3px; width: 100%; text-align: center; text-indent: 0; color: #fff; font-size: 20px; font-weight: normal; }
+.sortiner3-handle:hover { background: #ddd; }
+
+/**
+ * Sortiner
+ */
+
+.socialite { display: block; float: left; height: 35px; }

@@ -1,0 +1,17 @@
+https://www.php.net/manual/en/function.geoip-asnum-by-name.php
+https://www.php.net/manual/en/function.fann-cascadetrain-on-data.php
+https://www.php.net/manual/en/lua.assign.php
+https://www.php.net/manual/en/luasandbox.callfunction.php
+https://www.php.net/manual/en/function.connection-aborted.php
+https://www.php.net/manual/en/seaslog.alert.php
+https://www.php.net/manual/en/function.swoole-async-dns-lookup.php
+https://www.php.net/manual/en/tidy.body.php
+https://www.php.net/manual/en/phptoken.construct.php
+https://www.php.net/manual/en/function.get-meta-tags.php
+https://www.php.net/manual/en/v8js.executestring.php
+https://www.php.net/manual/en/function.yaml-emit-file.php
+https://www.php.net/manual/en/class.yaf-application.php
+https://www.php.net/manual/en/yaconf.get.php
+https://www.php.net/manual/en/function.taint.php
+https://www.php.net/manual/en/ds-sequence.allocate.php
+https://www.php.net/manual/en/function.var-representation.php

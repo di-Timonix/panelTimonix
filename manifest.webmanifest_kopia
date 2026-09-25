@@ -1,0 +1,16 @@
+{
+	"name" => 'timonix',
+	"short_name" => 'timonix',
+	"description" => "",
+	"background_color": "#7b0c0c",
+	"theme_color": "#831616",
+	'display' => 'minimal-ui',
+	'start_url' => '/?exec=arads',
+	'scope' => '/',
+	'icons' => [],
+	'gcm_sender_id' => '',
+	'gcm_user_visible_only' => true,
+	'related_applications' => [],
+	'capture_links' => 'none',
+	'shortcuts' => []
+}
